@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="地板滾球計分板，有多種賽制可供選擇，歡迎大家使用"
+    />
+    <meta
+      property="og:description"
+      content="地板滾球計分板，有多種賽制可供選擇，歡迎大家使用"
+    />
+    <!-- <link rel="stylesheet" href="./style.css" /> -->
+    <link
+      rel="stylesheet"
+      href="https://storage.googleapis.com/dev-public-demo/BocciaScoreBoard/style.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <title>地板滾球計分板</title>
+  </head>
+  <body>
+    <div class="container set-none">
+      <div class="top">
+        <div class="setting">
+          <button onclick="setting()" id="set-button">設定</button>
+        </div>
+        <div class="sport-class">
+          <div class="sport-class-text" id="sport-class-text">預設比賽</div>
+          <div class="set-none set-sport-class set-buttons">
+            <select
+              class="form-select"
+              id="set-sport-class-select"
+              onchange="selectSportClass(this.value)"
+            >
+              <option value="1" selected>BC1男子組個人賽</option>
+              <option value="2">BC1女子組個人賽</option>
+              <option value="3">BC2男子組個人賽</option>
+              <option value="4">BC2女子組個人賽</option>
+              <option value="5">BC3男子組個人賽</option>
+              <option value="6">BC3女子組個人賽</option>
+              <option value="7">BC4男子組個人賽</option>
+              <option value="8">BC4女子組個人賽</option>
+              <option value="9">BC1/2團體賽</option>
+              <option value="10">BC3雙人賽</option>
+              <option value="11">BC4雙人賽</option>
+              <option value="customize">自定義比賽</option>
+            </select>
+          </div>
+        </div>
+        <div class="reset-all">
+          <button onclick="resetAll()">重設</button>
+        </div>
+      </div>
+      <div class="main-board">
+        <div class="ends">
+          <div class="ends-text">局數：</div>
+          <div class="now-ends" id="now-ends">1</div>
+          <div class="seprate-ends">/</div>
+          <div class="total-ends" id="total-ends">4</div>
+          <div
+            class="set-none set-buttons set-total-ends-buttons"
+            id="set-total-ends-buttons"
+          >
+            <button class="plus" onclick="setTotalEnds('total-ends','plus')">
+              ＋
+            </button>
+            <button class="minus" onclick="setTotalEnds('total-ends','minus')">
+              －
+            </button>
+          </div>
+          <div class="set-none set-buttons set-next-ends">
+            <button onclick="nextEnds()">下一局</button>
+          </div>
+        </div>
+        <div class="team red-team">
+          <div class="team-name">
+            <div class="name red-name" id="red-name">601王小明</div>
+            <div class="set-none set-name set-buttons">
+              <label for="set-name-input">紅隊名稱：</label>
+              <input type="text" id="set-name-red-input" placeholder="請輸入" />
+            </div>
+          </div>
+          <div class="board">
+            <div class="time">
+              <span id="red-time">05:00</span>
+              <div
+                class="set-buttons set-time-buttons set-time-minute-buttons set-none"
+              >
+                <button class="plus" onclick="setTime('red-time','plusMinute')">
+                  ＋
+                </button>
+                <button
+                  class="minus"
+                  onclick="setTime('red-time','minusMinute')"
+                >
+                  －
+                </button>
+              </div>
+              <div
+                class="set-buttons set-time-buttons set-time-second-buttons set-none"
+              >
+                <button class="plus" onclick="setTime('red-time','plusSecond')">
+                  ＋
+                </button>
+                <button
+                  class="minus"
+                  onclick="setTime('red-time','minusSecond')"
+                >
+                  －
+                </button>
+              </div>
+            </div>
+            <div class="ball-count">
+              <div
+                class="ball"
+                id="red-ball-1"
+                onclick="ballThrow('red-ball-1')"
+              ></div>
+              <div
+                class="ball"
+                id="red-ball-2"
+                onclick="ballThrow('red-ball-2')"
+              ></div>
+              <div
+                class="ball"
+                id="red-ball-3"
+                onclick="ballThrow('red-ball-3')"
+              ></div>
+              <div
+                class="ball"
+                id="red-ball-4"
+                onclick="ballThrow('red-ball-4')"
+              ></div>
+              <div
+                class="ball"
+                id="red-ball-5"
+                onclick="ballThrow('red-ball-5')"
+              ></div>
+              <div
+                class="ball"
+                id="red-ball-6"
+                onclick="ballThrow('red-ball-6')"
+              ></div>
+            </div>
+            <div class="score">
+              <div class="penalty">
+                <div class="penalty-board">
+                  <div class="penalty-title">P</div>
+                  <div
+                    class="penalty-count"
+                    id="red-penalty-count"
+                    onclick="addPenalty('red-penalty-count')"
+                  >
+                    0
+                  </div>
+                </div>
+                <div class="set-none set-buttons set-penalty-buttons">
+                  <button
+                    class="plus"
+                    onclick="setPenalty('red-penalty-count','plus')"
+                  >
+                    ＋
+                  </button>
+                  <button
+                    class="minus"
+                    onclick="setPenalty('red-penalty-count','minus')"
+                  >
+                    －
+                  </button>
+                </div>
+              </div>
+              <div id="red-score" onclick="scoreAdd('red-score')">0</div>
+              <div class="set-none set-buttons set-score-buttons">
+                <button class="plus" onclick="setScore('red-score','plus')">
+                  ＋
+                </button>
+                <button class="minus" onclick="setScore('red-score','minus')">
+                  －
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="team blue-team">
+          <div class="team-name">
+            <div class="name blue-name" id="blue-name">602王大明</div>
+            <div class="set-none set-name set-buttons">
+              <label for="set-name-blue-input">藍隊名稱：</label>
+              <input
+                type="text"
+                id="set-name-blue-input"
+                placeholder="請輸入"
+              />
+            </div>
+          </div>
+          <div class="board">
+            <div class="time">
+              <span id="blue-time">00:05</span>
+              <div
+                class="set-buttons set-time-buttons set-time-minute-buttons set-none"
+              >
+                <button
+                  class="plus"
+                  onclick="setTime('blue-time','plusMinute')"
+                >
+                  ＋
+                </button>
+                <button
+                  class="minus"
+                  onclick="setTime('blue-time','minusMinute')"
+                >
+                  －
+                </button>
+              </div>
+              <div
+                class="set-buttons set-time-buttons set-time-second-buttons set-none"
+              >
+                <button
+                  class="plus"
+                  onclick="setTime('blue-time','plusSecond')"
+                >
+                  ＋
+                </button>
+                <button
+                  class="minus"
+                  onclick="setTime('blue-time','minusSecond')"
+                >
+                  －
+                </button>
+              </div>
+            </div>
+            <div class="ball-count">
+              <div
+                class="ball"
+                id="blue-ball-1"
+                onclick="ballThrow('blue-ball-1')"
+              ></div>
+              <div
+                class="ball"
+                id="blue-ball-2"
+                onclick="ballThrow('blue-ball-2')"
+              ></div>
+              <div
+                class="ball"
+                id="blue-ball-3"
+                onclick="ballThrow('blue-ball-3')"
+              ></div>
+              <div
+                class="ball"
+                id="blue-ball-4"
+                onclick="ballThrow('blue-ball-4')"
+              ></div>
+              <div
+                class="ball"
+                id="blue-ball-5"
+                onclick="ballThrow('blue-ball-5')"
+              ></div>
+              <div
+                class="ball"
+                id="blue-ball-6"
+                onclick="ballThrow('blue-ball-6')"
+              ></div>
+            </div>
+            <div class="score">
+              <div class="penalty">
+                <div class="penalty-board">
+                  <div class="penalty-title">P</div>
+                  <div
+                    class="penalty-count"
+                    id="blue-penalty-count"
+                    onclick="addPenalty('blue-penalty-count')"
+                  >
+                    0
+                  </div>
+                </div>
+                <div class="set-none set-buttons set-penalty-buttons">
+                  <button
+                    class="plus"
+                    onclick="setPenalty('blue-penalty-count','plus')"
+                  >
+                    ＋
+                  </button>
+                  <button
+                    class="minus"
+                    onclick="setPenalty('blue-penalty-count','minus')"
+                  >
+                    －
+                  </button>
+                </div>
+              </div>
+              <div id="blue-score" onclick="scoreAdd('blue-score')">0</div>
+              <div class="set-none set-buttons set-score-buttons">
+                <button class="plus" onclick="setScore('blue-score','plus')">
+                  ＋
+                </button>
+                <button class="minus" onclick="setScore('blue-score','minus')">
+                  －
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom">
+        <div class="contact-us">
+          <div class="contact-us-title">ContactUs:</div>
+          <a href="mailto: jacky850509@gmail.com" target="_blank"
+            >jacky850509@gmail.com</a
+          >
+        </div>
+        <div class="copy">
+          <div class="copy-right">
+            Copyright © 2022 JackyChang. All rights reserved.
+          </div>
+          <div class="creative-commons">
+            本著作係採用<a
+              rel="license"
+              href="http://creativecommons.org/licenses/by-nc-nd/3.0/tw/"
+              target="_blank"
+              >創用 CC 姓名標示-非商業性-禁止改作 3.0 台灣 授權條款</a
+            >授權.
+          </div>
+        </div>
+
+        <div class="bottom-set-buttons">
+          <div
+            class="set-none set-buttons set-between-ends-button"
+            onclick="openBottomCard('局間暫停','01:00')"
+          >
+            局間暫停
+          </div>
+          <div
+            class="set-none set-buttons set-warmup-button"
+            onclick="openBottomCard('熱身時間','02:00')"
+          >
+            熱身時間
+          </div>
+          <div
+            class="set-none set-buttons set-medical-buttons"
+            onclick="openPenaltyCard()"
+          >
+            罰球
+          </div>
+          <div
+            class="set-none set-buttons set-technical-buttons"
+            onclick="openBottomCard('技術暫停','10:00')"
+          >
+            技術暫停
+          </div>
+          <div
+            class="set-none set-buttons set-medical-buttons"
+            onclick="openBottomCard('醫療暫停','10:00')"
+          >
+            醫療暫停
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-buttons none" id="bottom-buttons">
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title" id="botttom-card-title">局間暫停</div>
+          <div class="card-exit" onclick="closeBottomCard()">x</div>
+        </div>
+        <div class="card-text" id="bottom-card-time">01:00</div>
+      </div>
+    </div>
+    <div class="penalty-buttons none" id="penalty-buttons">
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title" id="botttom-card-title">罰球</div>
+          <div class="card-exit" onclick="closePenaltyCard()">x</div>
+        </div>
+        <div class="penalty-card-time" id="penalty-card-time">01:00</div>
+        <div class="penalty-functions">
+          <div class="penalty-ball red-penalty-ball">
+            <div class="penalty-ball-title">剩餘</div>
+            <div class="penalty-ball-remain" id="red-penalty-ball-remain">
+              0
+            </div>
+            <div class="set-penalty-card-buttons">
+              <button
+                class="plus"
+                onclick="setPenalty('red-penalty-ball-remain','plus')"
+              >
+                ＋
+              </button>
+              <button
+                class="minus"
+                onclick="setPenalty('red-penalty-ball-remain','minus')"
+              >
+                －
+              </button>
+            </div>
+          </div>
+          <div class="reset-penalty-time" onclick="penaltyTimeReset()">
+            時間重設
+          </div>
+          <div class="penalty-ball blue-penalty-ball">
+            <div class="penalty-ball-title">剩餘</div>
+            <div class="penalty-ball-remain" id="blue-penalty-ball-remain">
+              0
+            </div>
+            <div class="set-penalty-card-buttons">
+              <button
+                class="plus"
+                onclick="setPenalty('blue-penalty-ball-remain','plus')"
+              >
+                ＋
+              </button>
+              <button
+                class="minus"
+                onclick="setPenalty('blue-penalty-ball-remain','minus')"
+              >
+                －
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="penalty-get-points">
+          <div class="penalty-get red-penalty-get">
+            <div class="penalty-get-title">罰球得分</div>
+            <div class="penalty-get-points" id="red-penalty-get-points">0</div>
+            <div class="set-penalty-card-buttons">
+              <button
+                class="plus"
+                onclick="setPenaltyGet('red-penalty-get-points','plus')"
+              >
+                ＋
+              </button>
+              <button
+                class="minus"
+                onclick="setPenaltyGet('red-penalty-get-points','minus')"
+              >
+                －
+              </button>
+            </div>
+          </div>
+          <div class="penalty-get blue-penalty-get">
+            <div class="penalty-get-title">罰球得分</div>
+            <div class="penalty-get-points" id="blue-penalty-get-points">0</div>
+            <div class="set-penalty-card-buttons">
+              <button
+                class="plus"
+                onclick="setPenaltyGet('blue-penalty-get-points','plus')"
+              >
+                ＋
+              </button>
+              <button
+                class="minus"
+                onclick="setPenaltyGet('blue-penalty-get-points','minus')"
+              >
+                －
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="penalty-complete" onclick="penaltyComplete()">罰球結束</div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<!-- 所有版面重設 -->
+<script>
+  function resetAll() {
+    redTimeStop();
+    blueTimeStop();
+    resetBoard(nowClass, true);
+  }
+</script>
+
+<!-- 選擇賽制 -->
+<script>
+  function selectSportClass(value) {
+    //從賽制資料中找到對應的賽制
+    nowClass = sportClasses.filter(
+      (sportClass) => sportClass.value == value
+    )[0];
+    //重設預設時間和局數
+    resetBoard(nowClass, true);
+  }
+</script>
+
+<!-- 紅隊比賽時間倒數 -->
+<script>
+  let redRunning = false;
+  var redTimerVariable = null;
+  function redRun(timer = true) {
+    if (timer) {
+      redRunning = true;
+      redTimerVariable = setInterval(redCountDownTimer, 1000);
+    } else {
+      redTimeStop();
+      console.log("time stop!");
+    }
+  }
+
+  document.getElementById("red-time").onclick = function () {
+    //如果要倒數計時的時候，發現藍隊正在倒數，不給倒數計時
+    //如果要倒數計時的時候，發現處於設定狀態，不給倒數計時
+    let containerClass = Object.values(
+      document.getElementsByClassName("container")[0].classList
+    );
+    if (containerClass.indexOf("set-none") != -1 && !blueRunning) {
+      if (!redRunning) {
+        redRun();
+      } else if (redRunning) {
+        redRun(false);
+      }
+    }
+  };
+  //時間倒數計算機
+  function redCountDownTimer() {
+    var timeStr = document.getElementById("red-time").innerHTML;
+    var totalSeconds = timeStrToInt(timeStr);
+    if (totalSeconds == 0) {
+      //到０自動停止
+      redTimeStop();
+      console.log("time up!");
+    } else {
+      totalSeconds--;
+      changeDocInnerHTML("red-time", secToStr(totalSeconds));
+    }
+  }
+</script>
+
+<!-- 藍隊比賽時間倒數 -->
+<script>
+  let blueRunning = false;
+  var blueTimerVariable = null;
+  function blueRun(timer = true) {
+    if (timer) {
+      blueRunning = true;
+      blueTimerVariable = setInterval(blueCountDownTimer, 1000);
+    } else {
+      blueTimeStop();
+      console.log("time stop!");
+    }
+  }
+
+  document.getElementById("blue-time").onclick = function () {
+    //如果要倒數計時的時候，發現處於設定狀態，不給倒數計時
+    let containerClass = Object.values(
+      document.getElementsByClassName("container")[0].classList
+    );
+    if (containerClass.indexOf("set-none") != -1 && !redRunning) {
+      if (!blueRunning) {
+        blueRun();
+      } else if (blueRunning) {
+        blueRun(false);
+      }
+    }
+  };
+  //時間倒數計算機
+  function blueCountDownTimer() {
+    var timeStr = document.getElementById("blue-time").innerHTML;
+    var totalSeconds = timeStrToInt(timeStr);
+    if (totalSeconds == 0) {
+      blueTimeStop();
+      console.log("time up!");
+    } else {
+      totalSeconds--;
+      changeDocInnerHTML("blue-time", secToStr(totalSeconds));
+    }
+  }
+</script>
+
+<!-- 球數按鈕 -->
+<script>
+  function ballThrow(id) {
+    var ball = document.getElementById(id).classList;
+    var ballList = Object.values(ball);
+    if (ballList.indexOf("throw") != -1) {
+      ball.remove("throw");
+    } else {
+      ball.add("throw");
+    }
+  }
+</script>
+
+<!-- 罰球數增加 -->
+<script>
+  function addPenalty(team) {
+    var penaltyCount = document.getElementById(team).innerHTML;
+    changeDocInnerHTML(team, parseInt(penaltyCount) + 1);
+    if (team == "red-penalty-count") {
+      redPenalty++;
+    } else if (team == "blue-penalty-count") {
+      bluePenalty++;
+    } else {
+      console.log("罰球設定錯誤！");
+    }
+  }
+</script>
+
+<!-- 總分加法 -->
+<script>
+  function scoreAdd(team) {
+    var score = document.getElementById(team).innerHTML;
+    changeDocInnerHTML(team, parseInt(score) + 1);
+  }
+</script>
+
+<!-- 設定功能 -->
+<!-- 設定功能是否顯示 -->
+<script>
+  // 預設－－目前狀態：不顯示
+  var set = false;
+  function setting() {
+    var elementListLen = document.getElementsByClassName("set-buttons").length;
+    if (set) {
+      //編輯結束，將input的值填入隊伍名稱
+      let newBlueName = document.getElementById("set-name-blue-input").value;
+      changeDocInnerHTML("blue-name", newBlueName);
+      let newRedName = document.getElementById("set-name-red-input").value;
+      changeDocInnerHTML("red-name", newRedName);
+      changeDocInnerHTML("set-button", "設定");
+      //對container新增class set-none
+      document.getElementsByClassName("container")[0].classList.add("set-none");
+      // 將目前狀態改為不顯示（增加set-none Class）
+      set = false;
+    } else {
+      // 顯示時，將隊伍名稱填入input內
+      document.getElementById("set-name-blue-input").value =
+        document.getElementById("blue-name").innerText;
+      document.getElementById("set-name-red-input").value =
+        document.getElementById("red-name").innerText;
+      changeDocInnerHTML("set-button", "完成");
+      //顯示時，自動暫停所有計時
+      redTimeStop();
+      blueTimeStop();
+      //對container刪除class set-none
+      document
+        .getElementsByClassName("container")[0]
+        .classList.remove("set-none");
+      // 將目前狀態改為顯示（刪除set-none Class）
+      set = true;
+      //是否顯示設定總局數按鈕
+      showTotalEndsButton();
+    }
+  }
+</script>
+
+<!-- 進入下一局 -->
+<script>
+  function nextEnds() {
+    nowEnds = document.getElementById("now-ends").innerHTML;
+    //如果目前局數比總局數少，表示可以下一局
+    if (nowEnds < initialEnds) {
+      let newEnds = parseInt(nowEnds) + 1;
+      changeDocInnerHTML("now-ends", newEnds);
+      resetBoard(nowClass, false);
+      nowEnds = newEnds;
+      resetBallCount();
+      showTotalEndsButton();
+    } else {
+      console.log("局數已達上限！");
+    }
+  }
+</script>
+
+<!-- 設定總局數加減 -->
+<script>
+  function setTotalEnds(id, method) {
+    var totalEnds = document.getElementById(id).innerHTML;
+    var nowEnds = document.getElementById("now-ends").innerHTML;
+    if (method == "plus") {
+      changeDocInnerHTML(id, parseInt(totalEnds) + 1);
+      initialEnds = parseInt(totalEnds) + 1;
+    } else if (method == "minus") {
+      if (totalEnds != 1 && totalEnds > nowEnds) {
+        //局數不是１才給－
+        changeDocInnerHTML(id, parseInt(totalEnds) - 1);
+        initialEnds = parseInt(totalEnds) - 1;
+      } else {
+        console.log(
+          "可能的錯誤：局數已經是１，不能再減少or總局數不能比目前局數少！"
+        );
+      }
+    } else {
+      console.log("局數設定錯誤！");
+    }
+  }
+</script>
+
+<!-- 設定時間加減 -->
+<script>
+  function setTime(teamTimeId, method) {
+    //取得目前秒數
+    var timeSec = timeStrToInt(document.getElementById(teamTimeId).innerHTML);
+    if (method == "plusSecond") {
+      changeDocInnerHTML(teamTimeId, secToStr(timeSec + 1));
+      console.log("plus " + timeSec + " toStr:" + secToStr(timeSec + 1));
+    } else if (method == "minusSecond") {
+      if (timeSec == 0) {
+        //如果時間已經是０，仍按下－，維持０，不做任何更動
+        console.log("你的時間已經沒有了！");
+      } else {
+        //時間不是０，－１之後回傳
+        changeDocInnerHTML(teamTimeId, secToStr(timeSec - 1));
+        console.log("minus " + timeSec + " toStr:" + secToStr(timeSec - 1));
+      }
+    } else if (method == "plusMinute") {
+      changeDocInnerHTML(teamTimeId, secToStr(timeSec + 60));
+    } else if (method == "minusMinute") {
+      if (timeSec - 60 < 0) {
+        console.log("你的時間不夠減１分鐘！");
+      } else {
+        changeDocInnerHTML(teamTimeId, secToStr(timeSec - 60));
+      }
+    } else {
+      console.log("時間設定計算錯誤！");
+    }
+  }
+</script>
+
+<!-- 設定罰球數加減 -->
+<script>
+  function setPenalty(teamPenaltyId, method) {
+    var penaltyCount = document.getElementById(teamPenaltyId).innerHTML;
+    if (method == "plus") {
+      changeDocInnerHTML(teamPenaltyId, parseInt(penaltyCount) + 1);
+      //修改罰球全域變數
+      if (teamPenaltyId == "red-penalty-count") {
+        redPenalty++;
+      } else if (teamPenaltyId == "blue-penalty-count") {
+        bluePenalty++;
+      }
+    } else if (method == "minus") {
+      if (penaltyCount != 0) {
+        //分數不是０才給－
+        changeDocInnerHTML(teamPenaltyId, parseInt(penaltyCount) - 1);
+        //修改罰球全域變數
+        if (teamPenaltyId == "red-penalty-count") {
+          redPenalty--;
+        } else if (teamPenaltyId == "blue-penalty-count") {
+          bluePenalty--;
+        }
+      } else {
+        console.log("罰球數已經是０，不能再減少");
+      }
+    } else {
+      console.log("罰球數設定計算錯誤！");
+    }
+  }
+</script>
+
+<!-- 設定分數加減 -->
+<script>
+  function setScore(teamScoreId, method) {
+    var score = document.getElementById(teamScoreId).innerHTML;
+    if (method == "plus") {
+      changeDocInnerHTML(teamScoreId, parseInt(score) + 1);
+    } else if (method == "minus") {
+      if (score != 0) {
+        //分數不是０才給－
+        changeDocInnerHTML(teamScoreId, parseInt(score) - 1);
+      } else {
+        console.log("分數已經是０，不能再減少");
+      }
+    } else {
+      console.log("分數設定計算錯誤！");
+    }
+  }
+</script>
+
+<!-- 開啟／關閉底部功能卡片 -->
+<script>
+  //開啟底部功能卡片
+  function openBottomCard(title, time) {
+    //移除class none
+    document.getElementById("bottom-buttons").classList.remove("none");
+    //新增container的class blur
+    document.getElementsByClassName("container")[0].classList.add("blur");
+    //設定標題與時間
+    changeDocInnerHTML("botttom-card-title", title);
+    changeDocInnerHTML("bottom-card-time", time);
+  }
+  //關閉底部功能卡片
+  function closeBottomCard() {
+    //新增class none
+    document.getElementById("bottom-buttons").classList.add("none");
+    //移除container的blur
+    document.getElementsByClassName("container")[0].classList.remove("blur");
+    //時間停止
+    bottomTimeStop();
+  }
+</script>
+
+<!-- 底部功能計時器 -->
+<script>
+  let bottomRunning = false;
+  var bottomTimerVariable = null;
+  function bottomRun(timer = true) {
+    if (timer) {
+      bottomRunning = true;
+      bottomTimerVariable = setInterval(bottomCountDownTimer, 1000);
+    } else {
+      bottomTimeStop();
+      console.log("time stop!");
+    }
+  }
+
+  document.getElementById("bottom-card-time").onclick = function () {
+    if (!bottomRunning) {
+      bottomRun();
+    } else if (bottomRunning) {
+      bottomRun(false);
+    }
+  };
+  //時間倒數計算機
+  function bottomCountDownTimer() {
+    var timeStr = document.getElementById("bottom-card-time").innerHTML;
+    var totalSeconds = timeStrToInt(timeStr);
+    if (totalSeconds == 0) {
+      //到０自動停止
+      bottomTimeStop();
+      console.log("time up!");
+    } else {
+      totalSeconds--;
+      changeDocInnerHTML("bottom-card-time", secToStr(totalSeconds));
+    }
+  }
+</script>
+
+<!-- 開啟／關閉罰球功能卡片 -->
+<script>
+  //開啟底部功能卡片
+  function openPenaltyCard() {
+    //重設時間
+    penaltyTimeReset();
+    //填入罰球數量
+    document.getElementById("red-penalty-ball-remain").innerHTML = redPenalty;
+    document.getElementById("blue-penalty-ball-remain").innerHTML = bluePenalty;
+    //重設罰球得分
+    document.getElementById("red-penalty-get-points").innerHTML = 0;
+    document.getElementById("blue-penalty-get-points").innerHTML = 0;
+    //移除class none
+    document.getElementById("penalty-buttons").classList.remove("none");
+    //新增container的class blur
+    document.getElementsByClassName("container")[0].classList.add("blur");
+  }
+  //關閉底部功能卡片
+  function closePenaltyCard() {
+    //新增class none
+    document.getElementById("penalty-buttons").classList.add("none");
+    //移除container的blur
+    document.getElementsByClassName("container")[0].classList.remove("blur");
+    //時間停止
+    penaltyTimeStop();
+  }
+</script>
+
+<!-- 罰球計時器 -->
+<script>
+  let penaltyRunning = false;
+  var penaltyTimerVariable = null;
+  function penaltyRun(timer = true) {
+    if (timer) {
+      penaltyRunning = true;
+      penaltyTimerVariable = setInterval(penaltyCountDownTimer, 1000);
+    } else {
+      penaltyTimeStop();
+      console.log("time stop!");
+    }
+  }
+
+  document.getElementById("penalty-card-time").onclick = function () {
+    if (!penaltyRunning) {
+      penaltyRun();
+    } else if (penaltyRunning) {
+      penaltyRun(false);
+    }
+  };
+  //時間倒數計算機
+  function penaltyCountDownTimer() {
+    var timeStr = document.getElementById("penalty-card-time").innerHTML;
+    var totalSeconds = timeStrToInt(timeStr);
+    if (totalSeconds == 0) {
+      //到０自動停止
+      penaltyTimeStop();
+      console.log("time up!");
+    } else {
+      totalSeconds--;
+      changeDocInnerHTML("penalty-card-time", secToStr(totalSeconds));
+    }
+  }
+</script>
+
+<!-- 罰球時間重設 -->
+<script>
+  function penaltyTimeReset() {
+    //停止計時
+    penaltyTimeStop();
+    //重設為１分鐘
+    changeDocInnerHTML("penalty-card-time", "01:00");
+  }
+</script>
+
+<!-- 罰球總分計算 -->
+<script>
+  function setPenaltyGet(teamPenaltyId, method) {
+    var penaltyScore = document.getElementById(teamPenaltyId).innerHTML;
+    if (method == "plus") {
+      changeDocInnerHTML(teamPenaltyId, parseInt(penaltyScore) + 1);
+    } else if (method == "minus") {
+      if (penaltyScore != 0) {
+        //分數不是０才給－
+        changeDocInnerHTML(teamPenaltyId, parseInt(penaltyScore) - 1);
+      } else {
+        console.log("罰球分數已經是０，不能再減少");
+      }
+    } else {
+      console.log("罰球分數設定計算錯誤！");
+    }
+  }
+</script>
+
+<!-- 罰球結束 -->
+<script>
+  function penaltyComplete() {
+    //計算紅隊總分
+    var redTotalScore =
+      parseInt(document.getElementById("red-score").innerHTML) +
+      parseInt(document.getElementById("red-penalty-get-points").innerHTML);
+    document.getElementById("red-score").innerHTML = redTotalScore;
+    //計算藍隊總分
+    var blueTotalScore =
+      parseInt(document.getElementById("blue-score").innerHTML) +
+      parseInt(document.getElementById("blue-penalty-get-points").innerHTML);
+    document.getElementById("blue-score").innerHTML = blueTotalScore;
+    //重設版面罰球數為０
+    document.getElementById("red-penalty-count").innerHTML = 0;
+    document.getElementById("blue-penalty-count").innerHTML = 0;
+    //關閉小框框
+    closePenaltyCard();
+  }
+</script>
+
+<!-- 通用功能 -->
+<script>
+  //賽制規定 比賽名稱，每局投擲時間，局數
+  const sportClasses = [
+    {
+      name: "BC1男子組個人賽",
+      value: 1,
+      time: "05:00",
+      ends: 4,
+    },
+    {
+      name: "BC1女子組個人賽",
+      value: 2,
+      time: "05:00",
+      ends: 4,
+    },
+    {
+      name: "BC2男子組個人賽",
+      value: 3,
+      time: "04:00",
+      ends: 4,
+    },
+    {
+      name: "BC2女子組個人賽",
+      value: 4,
+      time: "04:00",
+      ends: 4,
+    },
+    {
+      name: "BC3男子組個人賽",
+      value: 5,
+      time: "06:00",
+      ends: 4,
+    },
+    {
+      name: "BC3女子組個人賽",
+      value: 6,
+      time: "06:00",
+      ends: 4,
+    },
+    {
+      name: "BC4男子組個人賽",
+      value: 7,
+      time: "04:00",
+      ends: 4,
+    },
+    {
+      name: "BC4女子組個人賽",
+      value: 8,
+      time: "04:00",
+      ends: 4,
+    },
+    {
+      name: "BC1/2團體賽",
+      value: 9,
+      time: "06:00",
+      ends: 6,
+    },
+    {
+      name: "BC3雙人賽",
+      value: 10,
+      time: "07:00",
+      ends: 4,
+    },
+    {
+      name: "BC4雙人賽",
+      value: 11,
+      time: "05:00",
+      ends: 4,
+    },
+    {
+      name: "自定義比賽",
+      value: "customize",
+      time: "06:00",
+      ends: 4,
+    },
+  ];
+  //目前賽制預設值
+  let nowClass = sportClasses[0];
+  let initialTime = nowClass["time"];
+  let initialNowEnds = 1;
+  let nowEnds = 1;
+  let initialEnds = nowClass["ends"];
+  let initialGameName = nowClass["name"];
+  let initialScore = 0;
+  let redPenalty = 0;
+  let bluePenalty = 0;
+  let redPenaltyPoint = 0;
+  let bluePenaltyPoint = 0;
+  resetBoard(nowClass, true);
+
+  //重設比賽介面
+  function resetBoard(gameClass, isNewGame) {
+    //下一局
+    initialTime = gameClass["time"];
+    //根據相應的賽制更改時間
+    changeDocInnerHTML("red-time", initialTime);
+    changeDocInnerHTML("blue-time", initialTime);
+    //罰球數歸零
+    redPenalty = 0;
+    bluePenalty = 0;
+    changeDocInnerHTML("red-penalty-count", redPenalty);
+    changeDocInnerHTML("blue-penalty-count", bluePenalty);
+    //重設球數紀錄
+    resetBallCount();
+
+    //新的比賽，重設比賽名稱，局數，總局數，分數
+    if (isNewGame) {
+      initialEnds = gameClass["ends"];
+      initialGameName = gameClass["name"];
+      //填入比賽名稱
+      changeDocInnerHTML("sport-class-text", initialGameName);
+      //填入總局數
+      changeDocInnerHTML("total-ends", initialEnds);
+      //重設目前局數
+      nowEnds = 1;
+      changeDocInnerHTML("now-ends", nowEnds);
+      //顯示總局數設定按鈕
+      showTotalEndsButton();
+      //重設分數
+      changeDocInnerHTML("red-score", initialScore);
+      changeDocInnerHTML("blue-score", initialScore);
+    }
+  }
+  //重設球數計算
+  function resetBallCount() {
+    function resetTeamBallCount(team) {
+      for (let i = 1; i < 7; i++) {
+        var ballCountId = team + "-ball-" + i;
+        var ball = document.getElementById(ballCountId).classList;
+        var ballList = Object.values(ball);
+        if (ballList.indexOf("throw") != -1) {
+          ball.remove("throw");
+        }
+      }
+    }
+    resetTeamBallCount("red");
+    resetTeamBallCount("blue");
+  }
+  //是否顯示總局數加減按鈕
+  function showTotalEndsButton() {
+    if (nowEnds == 1) {
+      document
+        .getElementById("set-total-ends-buttons")
+        .classList.remove("set-total-ends-buttons-none");
+    } else {
+      document
+        .getElementById("set-total-ends-buttons")
+        .classList.add("set-total-ends-buttons-none");
+    }
+  }
+  //取得DOM的ID，將內文改成想要的
+  function changeDocInnerHTML(id, newText) {
+    document.getElementById(id).innerHTML = newText;
+  }
+  //紅隊時間暫停
+  function redTimeStop() {
+    redRunning = false;
+    clearInterval(redTimerVariable);
+    redTimerVariable = undefined;
+  }
+  //藍隊時間暫停
+  function blueTimeStop() {
+    blueRunning = false;
+    clearInterval(blueTimerVariable);
+    blueTimerVariable = undefined;
+  }
+  //底部時間暫停
+  function bottomTimeStop() {
+    bottomRunning = false;
+    clearInterval(bottomTimerVariable);
+    bottomTimerVariable = undefined;
+  }
+  //罰球時間暫停
+  function penaltyTimeStop() {
+    penaltyRunning = false;
+    clearInterval(penaltyTimerVariable);
+    penaltyTimerVariable = undefined;
+  }
+  //字串時間轉整數秒數
+  function timeStrToInt(str) {
+    return parseInt(str.split(":")[0]) * 60 + parseInt(str.split(":")[1]);
+  }
+  //秒數時間轉字串
+  function secToStr(sec) {
+    var minute = Math.floor(sec / 60);
+    var seconds = sec - minute * 60;
+    var timeShow = "0" + minute;
+    // 處理時間顯示格式 XX:XX
+    if (seconds > 9) {
+      //秒數１０～６０
+      timeShow += ":" + seconds;
+    } else {
+      //秒數０～９
+      timeShow += ":0" + seconds;
+    }
+    return timeShow;
+  }
+</script>

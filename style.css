@@ -1,0 +1,720 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: "Noto Sans TC", sans-serif;
+  box-sizing: border-box;
+}
+body {
+  position: relative;
+}
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+}
+/* 比賽標題 */
+.top {
+  width: 100%;
+  height: 8%;
+  display: flex;
+  align-items: center;
+}
+.top .setting {
+  margin-left: 2vmin;
+}
+.top .reset-all {
+  margin-left: auto;
+  margin-right: 2vmin;
+}
+/* 設定與重設相同的東西 */
+.top .setting button,
+.top .reset-all button {
+  border: none;
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 3vmin;
+  color: white;
+}
+.top .setting button:hover,
+.top .reset-all button:hover {
+  cursor: pointer;
+  transition: 0.3s;
+}
+.top .setting button {
+  background-color: #0d6efd;
+}
+.top .reset-all button {
+  background-color: #198754;
+}
+.top .setting button:hover {
+  background-color: #084298;
+}
+.top .reset-all button:hover {
+  background-color: #157347;
+}
+
+.top .sport-class {
+  position: relative;
+  margin-left: 2vmin;
+  font-size: 5vmin;
+}
+
+/* 紅藍隊相同的東西 */
+.main-board {
+  position: relative;
+  display: flex;
+  height: 85%;
+}
+.main-board .ends {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  background-color: rgb(33, 37, 41);
+  color: #fff;
+  font-size: 3vmin;
+  padding: 10px 20px;
+  border-radius: 5px 5px 0 0;
+}
+.main-board .team {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.main-board .team .team-name {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 5vmin;
+  color: #fff;
+  font-weight: bolder;
+  padding-bottom: 2px;
+  border-bottom: 1px solid #fff;
+  position: relative;
+}
+
+/* 重要資訊（時間，球數，分數）版面 */
+.main-board .board {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+.main-board .board .time {
+  position: relative;
+  width: 95%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30vmin;
+  line-height: initial;
+}
+.main-board .board .time span {
+  vertical-align: middle;
+}
+.main-board .board .time span:hover {
+  transition: 0.2s;
+  color: yellow;
+  font-weight: 900;
+  cursor: pointer;
+}
+.main-board .board .time span:active {
+  color: black;
+}
+
+.main-board .board .ball-count {
+  height: 10%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 15vmin;
+}
+/* 初始球狀態 */
+.main-board .board .ball-count .ball {
+  width: 5vmin;
+  height: 5vmin;
+  border: 1vmin solid #fff;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+.main-board .board .ball-count .ball:hover {
+  transition: 0.2s;
+  border: 1.5vmin solid #fff;
+  cursor: pointer;
+}
+.main-board .board .ball-count .ball:active {
+  border-color: black;
+}
+.main-board .board .ball-count .ball.throw {
+  background-color: #fff;
+}
+.main-board .board .score {
+  /* height: 30%; */
+  width: 95%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20vmin;
+  position: relative;
+}
+.main-board .board .score .penalty {
+  display: flex;
+  position: absolute;
+  left: 0;
+}
+.main-board .board .score .penalty .penalty-board {
+  font-size: 5vmin;
+  border: 2px solid #ccc;
+  background-color: #000;
+}
+.score .penalty .penalty-board .penalty-title {
+  background-color: rgb(108, 117, 125);
+  padding: 0 2vmin;
+}
+.score .penalty .penalty-board .penalty-count {
+  background-color: rgb(33, 37, 41);
+  padding: 0 2vmin;
+}
+
+.score #red-score:hover,
+.score #blue-score:hover,
+.score .penalty .penalty-board .penalty-count:hover {
+  transition: 0.2s;
+  color: yellow;
+  font-weight: 900;
+  cursor: pointer;
+}
+.score .penalty .penalty-board .penalty-count:active {
+  color: #ffc107;
+}
+
+.score #red-score:active,
+.score #blue-score:active {
+  color: black;
+}
+/* 紅藍隊不同的東西 */
+.main-board .red-team {
+  background-color: red;
+}
+.main-board .blue-team {
+  background-color: blue;
+}
+/* 底部其他功能 */
+.bottom {
+  height: 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+.bottom .contact-us {
+  display: flex;
+  flex-direction: column;
+}
+.bottom .copy {
+  margin-left: auto;
+}
+
+/* 設定用版面 */
+/* 按下設定才會出現 */
+.container.set-none .set-buttons {
+  display: none !important;
+}
+/* 設定賽制 */
+.set-sport-class {
+  width: 80vw;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+}
+.set-sport-class .form-select {
+  font-size: 3vmin;
+  border-radius: 5px;
+  height: 80%;
+}
+/* 設定局數 */
+.set-total-ends-buttons {
+  margin-left: 2vmin;
+  display: flex;
+}
+/* 只在目前局數１的時候會出現設定總局數按鈕 */
+.set-total-ends-buttons.set-total-ends-buttons-none {
+  display: none !important;
+}
+.set-total-ends-buttons button {
+  font-size: 3vmin;
+  padding: 0 2vmin;
+  border-radius: 5px;
+  background-color: #ffc107;
+  border: 1px solid #fff;
+}
+.set-total-ends-buttons button:hover {
+  cursor: pointer;
+  background-color: #fff;
+  transition: 0.3s;
+}
+.set-total-ends-buttons .plus {
+  margin-right: 1vmin;
+}
+/* 設定下一局 */
+.set-next-ends {
+  margin-left: 2vmin;
+}
+.set-next-ends button {
+  padding: 0.5vmin 2vmin;
+  font-size: 2.5vmin;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #198754;
+  border: 1px solid #fff;
+}
+.set-next-ends button:hover {
+  background-color: #157347;
+  cursor: pointer;
+  transition: 0.3s;
+}
+/* 設定隊伍名稱 */
+.set-name {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.red-team .team-name .set-name {
+  background-color: red;
+}
+.blue-team .team-name .set-name {
+  background-color: blue;
+}
+.set-name label {
+  margin-left: 5%;
+}
+.set-name input {
+  width: 30vw;
+  height: 80%;
+  border: none;
+  border-radius: 5px;
+  font-size: 5vmin;
+}
+.set-name input:focus {
+  outline-color: #ffc107;
+  background-color: #000;
+  color: #fff;
+  transition: 0.2s;
+}
+/* 設定時間 */
+.set-time-buttons {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+}
+.set-time-second-buttons {
+  right: 0;
+}
+.set-time-minute-buttons {
+  left: 0;
+}
+.set-time-buttons button {
+  font-size: 5vmin;
+  border-radius: 5px;
+  background-color: #ffc107;
+  border: 1px solid #fff;
+}
+.set-time-buttons button:hover {
+  cursor: pointer;
+  background-color: #fff;
+  transition: 0.3s;
+}
+.set-time-buttons button.plus {
+  margin-bottom: 2px;
+}
+.set-time-buttons button.minus {
+  margin-top: 2px;
+}
+/* 設定罰球 */
+.set-penalty-buttons {
+  display: flex;
+  flex-direction: column;
+  margin-left: 2vmin;
+}
+.set-penalty-buttons button {
+  font-size: 5vmin;
+  border-radius: 5px;
+  background-color: #ffc107;
+  border: 2px solid #fff;
+}
+.set-penalty-buttons button:hover {
+  cursor: pointer;
+  background-color: #fff;
+  transition: 0.3s;
+}
+.set-penalty-buttons button.plus {
+  margin-bottom: 2px;
+}
+.set-penalty-buttons button.minus {
+  margin-top: 2px;
+}
+/* 設定分數 */
+.set-score-buttons {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 0;
+}
+.set-score-buttons button {
+  font-size: 5vmin;
+  border-radius: 5px;
+  background-color: #ffc107;
+  border: 2px solid #fff;
+}
+.set-score-buttons button:hover {
+  cursor: pointer;
+  background-color: #fff;
+  transition: 0.3s;
+}
+.set-score-buttons button.plus {
+  margin-bottom: 2px;
+}
+.set-score-buttons button.minus {
+  margin-top: 2px;
+}
+/* 底部設定按鈕 */
+.bottom .bottom-set-buttons {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bottom .set-buttons {
+  width: calc(100% / 5);
+  height: 100%;
+  font-size: 3vmin;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bottom .set-buttons:nth-child(odd) {
+  background-color: rgb(33, 37, 41);
+}
+.bottom .set-buttons:nth-child(even) {
+  background-color: rgb(108, 117, 125);
+}
+.bottom .set-buttons:hover {
+  font-size: 4vmin;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+/* 底部按鈕按下後跳出的小視窗（罰球除外）*/
+.container.blur {
+  filter: blur(4px);
+}
+.bottom-buttons.none {
+  display: none !important;
+}
+.bottom-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+.bottom-buttons .card {
+  width: 45%;
+  height: 65%;
+  border: 1vmin solid black;
+  background-color: #fff;
+}
+.bottom-buttons .card .card-top {
+  height: 15%;
+  display: flex;
+  align-items: center;
+  font-size: 6vmin;
+  color: #fff;
+  background-color: rgb(108, 117, 125);
+}
+.bottom-buttons .card .card-top .card-title {
+  margin-left: 2vmin;
+  margin-right: auto;
+}
+.bottom-buttons .card .card-top .card-exit {
+  width: 5vmin;
+  height: 5vmin;
+  font-size: 3vmin;
+  border-radius: 5px;
+  text-align: center;
+  margin-right: 2vmin;
+  color: #fff;
+  background-color: #dc3545;
+}
+.bottom-buttons .card .card-top .card-exit:hover {
+  cursor: pointer;
+  background-color: #b02a37;
+  transition: 0.3s;
+}
+.bottom-buttons .card .card-text {
+  height: 85%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30vmin;
+  padding-bottom: 5vmin;
+  color: #fff;
+  background-color: rgb(33, 37, 41);
+}
+.bottom-buttons .card .card-text:hover {
+  transition: 0.2s;
+  color: yellow;
+  font-weight: 900;
+  cursor: pointer;
+}
+.bottom-buttons .card .card-text:active {
+  color: #ffc107;
+}
+
+/* 罰球 按鈕按下後跳出的小視窗*/
+.penalty-buttons.none {
+  display: none !important;
+}
+.penalty-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+.penalty-buttons .card {
+  width: 45%;
+  height: 80%;
+  border: 1vmin solid black;
+  background-color: #fff;
+}
+.penalty-buttons .card .card-top {
+  height: 10%;
+  display: flex;
+  align-items: center;
+  font-size: 6vmin;
+  color: #fff;
+  background-color: rgb(108, 117, 125);
+}
+.penalty-buttons .card .card-top .card-title {
+  margin-left: 2vmin;
+  margin-right: auto;
+}
+.penalty-buttons .card .card-top .card-exit {
+  width: 5vmin;
+  height: 5vmin;
+  font-size: 3vmin;
+  border-radius: 5px;
+  text-align: center;
+  margin-right: 2vmin;
+  color: #fff;
+  background-color: #dc3545;
+}
+.penalty-buttons .card .card-top .card-exit:hover {
+  cursor: pointer;
+  background-color: #b02a37;
+  transition: 0.3s;
+}
+/* 罰球時間 */
+.penalty-buttons .card .penalty-card-time {
+  height: 48%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30vmin;
+  padding-bottom: 5vmin;
+  color: #fff;
+  background-color: rgb(33, 37, 41);
+}
+.penalty-buttons .card .penalty-card-time:hover {
+  transition: 0.2s;
+  color: yellow;
+  font-weight: 900;
+  cursor: pointer;
+}
+.penalty-buttons .card .penalty-card-time:active {
+  color: #ffc107;
+}
+.penalty-buttons .card .penalty-functions {
+  height: 15%;
+  display: flex;
+  font-size: 4vmin;
+  color: #fff;
+  opacity: 0.8;
+}
+/* 剩餘罰球數 */
+.penalty-buttons .card .penalty-functions .penalty-ball {
+  width: 35%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.penalty-buttons .card .penalty-functions .red-penalty-ball {
+  background-color: red;
+}
+.penalty-buttons .card .penalty-functions .blue-penalty-ball {
+  background-color: blue;
+}
+/* 統一 ＋－按鈕形式 */
+.penalty-buttons .set-penalty-card-buttons {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+}
+.penalty-buttons .set-penalty-card-buttons .plus {
+  width: 20%;
+  height: 50%;
+  font-size: 3vmin;
+  margin-left: 5%;
+  background-color: #ffc107;
+  border: 2px solid #fff;
+}
+.penalty-buttons .set-penalty-card-buttons .minus {
+  width: 20%;
+  height: 50%;
+  font-size: 3vmin;
+  margin-left: auto;
+  margin-right: 5%;
+  background-color: #ffc107;
+  border: 2px solid #fff;
+}
+.penalty-buttons .set-penalty-card-buttons .plus:hover,
+.penalty-buttons .set-penalty-card-buttons .minus:hover {
+  cursor: pointer;
+  background-color: #fff;
+  transition: 0.3s;
+}
+.penalty-buttons .card .penalty-functions .reset-penalty-time {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  background-color: #ffc107;
+}
+.penalty-buttons .card .penalty-functions .reset-penalty-time:hover {
+  cursor: pointer;
+  font-weight: 900;
+  transition: 0.3s;
+}
+/* 罰球得分計分 */
+.penalty-buttons .card .penalty-get-points {
+  height: 20%;
+  display: flex;
+}
+.penalty-buttons .card .penalty-get {
+  width: 50%;
+  height: 100%;
+  font-size: 4vmin;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+  position: relative;
+}
+.penalty-buttons .card .red-penalty-get {
+  background-color: red;
+}
+.penalty-buttons .card .blue-penalty-get {
+  background-color: blue;
+}
+.penalty-get .penalty-get-points {
+  font-size: 6vmin;
+}
+/* 罰球結束 */
+.penalty-buttons .card .penalty-complete {
+  width: 100%;
+  height: 7%;
+  font-size: 3vmin;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background-color: #198754;
+}
+.penalty-buttons .card .penalty-complete:hover {
+  cursor: pointer;
+  font-weight: bolder;
+  background-color: #157347;
+  transition: 0.3s;
+}
+
+/* RWD部分 調整字體大小 */
+/* 1400px以下 */
+@media screen and (max-width: 1400px) {
+  .set-name input {
+    width: 25vw;
+  }
+  .main-board .board .time,
+  .bottom-buttons .card .card-text,
+  .penalty-buttons .card .penalty-card-time {
+    font-size: 23vmin;
+  }
+  .main-board .board .ball-count {
+    font-size: 10vmin;
+  }
+}
+
+/* 992px以下 */
+@media screen and (max-width: 992px) {
+  .set-name input {
+    width: 20vw;
+  }
+  .main-board .board .time,
+  .bottom-buttons .card .card-text,
+  .penalty-buttons .card .penalty-card-time {
+    font-size: 18vmin;
+  }
+  .main-board .board .ball-count {
+    font-size: 7vmin;
+  }
+}
+/* 768px以下 */
+@media screen and (max-width: 768px) {
+  .set-name input {
+    width: 20vw;
+  }
+  .main-board .board .time,
+  .bottom-buttons .card .card-text,
+  .penalty-buttons .card .penalty-card-time {
+    font-size: 16vmin;
+  }
+  .main-board .board .ball-count {
+    font-size: 5vmin;
+  }
+}
